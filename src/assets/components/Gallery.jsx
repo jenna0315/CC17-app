@@ -11,21 +11,27 @@ const [tours,setTours] = useState([])
             .catch(error => {
                 console.error('Error fetching tours data:', error)})
             .finally(() => {
-                console.log('Fetch attempt finished')})},
+                console.log('Fetch attempt completed successfully')})},
      []); // Empty dependency array: Runs only once when the component mounts
 
     return (
         <div>
-            <h2>Tours We Offer</h2>
-            <ul>
-                {tours.map(tour => (
-                    <li key={tour.id}>
-                        {tour.name}: ${tour.price}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+      <h2>Tours We Offer</h2>
+      <div>
+        {tours.length === 0 ? (
+          <p>Loading...</p> // Show a loading message if there are no tours yet
+        ) : (
+          tours.map(tour => (
+            <div key={tour.id}>
+              {/* Render the image and the tour details */}
+              <img src={tour.image} alt={tour.name} />
+              <p>{tour.name}</p>
+              <p>${tour.price}</p>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
 }
-
 export default Gallery
