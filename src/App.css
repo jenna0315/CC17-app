@@ -1,117 +1,123 @@
-body {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+/* Container for the entire gallery */
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensures no overflow from child elements */
+}
+
+/* Heading style */
+h2 {
+  text-align: center;
+  color: #842980;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  line-height: 1.2; /* Improves readability */
+}
+
+/* Main gallery wrapper */
+div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Default to 3 items per row */
+  gap: 20px; /* Slightly larger gap for visual balance */
+  justify-items: center; /* Center items in each grid cell */
+  grid-auto-rows: minmax(200, auto); /* Ensures each row has consistent height */
+}
+
+/* Individual tour card styling */
+div > div {
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+  display: flex;
+  flex-direction: column; /* Ensure content is stacked vertically */
+}
+
+/* Hover effect on each tour item */
+div > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus effect for accessibility */
+div > div:focus {
+  outline: 3px solid #61305e; /* Adds focus outline for keyboard navigation */
+}
+
+/* Small image styling */
+img {
+  width: 100%;
+  height: 250px; /* Smaller height for smaller images */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-bottom: 2px solid #eee;
+  transition: transform 0.3s ease;
+}
+
+/* Apply slight zoom effect on hover for images */
+div > div:hover img {
+  transform: scale(1.05);
+}
+
+/* Tour details (name and price) */
+p {
+  padding: 10px 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.75rem;
+  color: #b76fbb;
+  margin: 0;
+  line-height: 1.4; /* Improved line height for readability */
+}
+
+/* Tour name styling */
+p:first-child {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3e0f40;
+  margin-bottom: 5px;
+}
+
+/* Price styling */
+p:last-child {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #7b3973;
+}
+
+/* Loading message */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 30px;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 1024px) {
+  div {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens (tablets) */
   }
-  
-  .gallery-container {
-    text-align: center;
-    max-width: 1000px;
-    padding: 20px;
-    background-color: #e33535;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  div {
+    grid-template-columns: repeat(1, 1fr); /* 1 item per row on smaller screens (mobile phones) */
   }
-  
-  /* Heading style */
-  .gallery-heading {
+
+  /* Adjust heading font size for smaller screens */
+  h2 {
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #333;
-    font-weight: bold; /* Ensures the heading text is bold */
   }
-  
-  /* Tour list styling */
-  .tour-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 0 10px;
-  }
-  
-  /* Individual tour item */
-  .tour-item {
-    background-color: #fafafa;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .tour-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Image styling */
-  .tour-image {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    max-height: 180px; /* Adjusted to medium size */
-    object-fit: cover;
-  }
-  
-  /* Name and Price */
-  .tour-name {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 10px;
-    font-weight: bold; /* Bold text for the name */
-  }
-  
-  .tour-price {
-    font-size: 1.1rem;
-    color: #007bff;
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-weight: bold; /* Bold text for price */
-  }
-  
-  /* Button styling */
-  .remove-button {
-    background-color: #ff6347;
-    color: rgb(134, 16, 16);
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold; /* Bold text for the button */
-  }
-  
-  .remove-button:hover {
-    background-color: #e55347;
-  }
-  
-  /* Description section */
-  .tour-description {
-    margin-top: 10px;
-  }
-  
-  .description-button {
-    background-color: #007bff;
-    color: rgb(192, 22, 22);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
-    font-weight: bold; /* Bold text for the button */
-  }
-  
-  .description-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .description-text {
-    font-size: 1rem;
-    color: #555;
-    margin-top: 10px;
-    font-weight: bold; /* Bold text for the description */
-  }
-  
+}
