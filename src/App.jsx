@@ -1,4 +1,4 @@
-import Gallery from "./assets/components/gallery"
+import Gallery from "./assets/components/Gallery"
 import './App.css'; 
 
 

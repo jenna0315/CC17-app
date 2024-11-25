@@ -1,5 +1,6 @@
 //Task 1: Creation of Gallery.jsx
 import {useState, useEffect} from "react";
+
 function Gallery() {
 const [tours,setTours] = useState([])
 
