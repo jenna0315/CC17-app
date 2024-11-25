@@ -13,7 +13,21 @@ const [tours,setTours] = useState([])
                 console.error('Error fetching tours data:', error)})
             .finally(() => {
                 console.log('Fetch attempt completed successfully')})},
-     []); // Empty dependency array: Runs only once when the component mounts
+     []); 
+
+       // Function to handle removing a tour from the list
+  const removeTour = (id) => {
+    setTours(tours.filter((tour) => tour.id !== id));
+  };
+    // Function to handle toggling the description
+    const toggleDescription = (id) => {
+      setTours(tours.map((tour) => {
+        if (tour.id === id) {
+          return { ...tour, showDescription: !tour.showDescription };
+        }
+        return tour;
+      }));
+    };
 
     return (
         <div>
@@ -24,12 +38,19 @@ const [tours,setTours] = useState([])
         ) : (
           tours.map(tour => (
             <div key={tour.id}>
-              {/* Render the image and the tour details */}
               <img src={tour.image} alt={tour.name} />
               <p>{tour.name}</p>
               <p>${tour.price}</p>
+              <button onClick={() => removeTour(tour.id)}>Not Interested</button>
+              <div>
+                <button onClick={() => toggleDescription(tour.id)}>
+                  {tour.showDescription ? "Show Less" : "Read More"}
+                </button>
+                {tour.showDescription && <p>{tour.info}</p>}
+              </div>
             </div>
           ))
+          
         )}
       </div>
     </div>
